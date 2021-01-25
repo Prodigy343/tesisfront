@@ -7,12 +7,14 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 export const Event = ({name, url, description}) => {
   return (
     <Paper className="event-container shadow-box">
-      <a href={url}>
-        <div className="img-container">
+      <div className="event-layout">
+        <a className="img-container" href={url}>
           <img src={url} alt=""/>
-        </div>        
+        </a>
         <div className="content-container">
-          <div className="title">{name}</div>
+          <div className="title">
+            <a href={url}>{name}</a>
+          </div>
           <div className="information">
             <a href={url}>
               <IconButton aria-label="event" size="small">
@@ -39,7 +41,7 @@ export const Event = ({name, url, description}) => {
             <a href={url}><Button>Asistir</Button></a>
           </div>
         </div>
-      </a>
+      </div>
     </Paper>
   )
 }

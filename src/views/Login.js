@@ -11,6 +11,7 @@ import { Context } from '../Context';
 export const Login = () => {
 
   const [values, setValues] = React.useState({
+    user: '',
     password: '',
     showPassword: false,
   });
@@ -30,6 +31,7 @@ export const Login = () => {
   };
 
   const loginFake = () => {
+    console.log(values);
     setUserState(true);
 
   }
@@ -39,13 +41,12 @@ export const Login = () => {
       <img className="logo" src={CiensLogo} alt=""/>
       <form onSubmit={loginFake}>
         <FormControl className="container-form" noValidate autoComplete="off">
-          <TextField required id="user" label="Correo" />
+          <TextField id="ext-user" value={values.user} onChange={handleChange('user')} label="Usuario" />
         </FormControl>
         <FormControl className="container-form" noValidate autoComplete="off">
           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
           <Input
-            required
-            id="standard-adornment-password"
+            id="ext-password"
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}

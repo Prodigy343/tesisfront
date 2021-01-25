@@ -7,18 +7,22 @@ import CiensLogo from '../assets/ciens.png';
 export const Main = ({children}) => {
   const items = [
     {
+      id: 0,
       name: "Eventos",
       link: "/events",
     },
     {
+      id: 1,
       name: "Prueba 2",
       link: "test-2",
     },
     {
+      id: 2,
       name: "Prueba 3",
       link: "test-3",
     },
     {
+      id: 3,
       name: "Cerrar Sesión",
       link: "/",
     },
@@ -39,7 +43,7 @@ export const Main = ({children}) => {
           </Grid>
           <Grid className="align-middle" item xs={2}>
             <div className="right">
-              <IconButton onClick={() => setSidebarState(true)} aria-label="menu" size="large">
+              <IconButton onClick={() => setSidebarState(true)} aria-label="menu" size="medium">
                 <MenuIcon fontSize="inherit" />
               </IconButton>
             </div>

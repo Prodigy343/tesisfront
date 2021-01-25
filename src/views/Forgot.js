@@ -15,7 +15,7 @@ export const Forgot = () => {
           base de datos 
         </p>
         <FormControl className="container-form" noValidate autoComplete="off">
-          <TextField required id="user" label="Correo Electrónico" />
+          <TextField id="user" label="Correo Electrónico" />
         </FormControl>
         <Button className="send-btn" variant="contained" color="primary">
             Confirmar Correo

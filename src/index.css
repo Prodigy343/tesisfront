@@ -97,7 +97,7 @@ code {
   box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.19);
 }
 
-.event-container > a{
+.event-container > .event-layout{
   display: flex;
   text-decoration: none;
 }
@@ -281,4 +281,20 @@ code {
 form .info{
   font-size: 14px;
   padding: 0 25px;
+}
+
+.ext-error .ext-error{
+  text-align: left;
+  color: red;
+  font-size: 11px;
+}
+
+.ext-error label{
+  color: red;
+}
+
+.paper-form .ext-error .MuiInput-underline:hover:not(.Mui-disabled):before,
+.paper-form .ext-error .MuiInput-underline:after,
+.ext-error .MuiInput-underline:before{
+  border-bottom: solid 2px red;
 }
