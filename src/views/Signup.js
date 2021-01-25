@@ -13,9 +13,11 @@ export const Signup = () => {
       type: 'email',
       constraints: {
         required: true,
+        regex1: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 
       },
       errors: {
         required: 'El campo correo es requerido',
+        regex1: 'El correo no tiene un formato válido'
       }
     },
     phone:{
@@ -86,24 +88,33 @@ export const Signup = () => {
 
   const verifyError = (prop, value) => {
     const types = Object.keys(formStructure[prop].errors);
+    let error;
 
     types.every(key => {
-      switch (key) {
-        case 'required':
-          setErrorStates({ ...errorStates, [prop]: value.length === 0 ? 'required' : null });
-          if(value.length === 0) return false;
+      const regexKey = /regex\d$/;
+
+      switch (true) {
+        case key === 'required':
+          error = value.length === 0;
+          setErrorStates({ ...errorStates, [prop]: error ? key : null });
           break;
       
-        case 'confirm':
+        case key === 'confirm':
           const target = prop.toLowerCase().replace('confirm', '');
-          setErrorStates({ ...errorStates, [prop]:  value !== values[target] ? 'confirm' : null });
-          if(value !== values[target]) return false;
+          error = value !== values[target];
+          setErrorStates({ ...errorStates, [prop]: error ? key : null });
           break;
         
+        case regexKey.test(key):
+          error = !formStructure[prop].constraints[key].test(value);
+          setErrorStates({ ...errorStates, [prop]: error ? key : null });
+          break;
+
         default:
           break;
       }
-      return true;
+
+      return error ? false:true ;
     });
   }
 
