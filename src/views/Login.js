@@ -40,7 +40,7 @@ export const Login = () => {
     <Paper className="paper-form login-form">
       <img className="logo" src={CiensLogo} alt=""/>
       <form onSubmit={loginFake}>
-        <FormControl className="container-form" noValidate autoComplete="off">
+        <FormControl className="container-form" autoComplete="off">
           <TextField id="ext-user" value={values.user} onChange={handleChange('user')} label="Usuario" />
         </FormControl>
         <FormControl className="container-form" noValidate autoComplete="off">
