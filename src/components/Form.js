@@ -1,72 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Input } from './Input';
+import { Button } from '@material-ui/core';
 
 export const Form = ({ 
     structure, 
-    onSubmitCallback, 
+    submitData, onSubmitCallback, 
     values, setValues,
     submitText, submitProps,
     children
   }) => {
-
-  useEffect(() => {
-    console.log(structure);
-    console.log(stateObject);
-    console.log(submitText);
-  }, []);
-
-  const formStructure = {
-    email:{
-      type: 'email',
-      constraints: {
-        required: true,
-        regex1: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 
-      },
-      errors: {
-        required: 'El campo correo es requerido',
-        regex1: 'El correo no tiene un formato válido'
-      }
-    },
-    phone:{
-      type: 'text',
-      label: ,
-      constraints: {
-        required: true,
-      },
-      errors: {
-        required: 'El campo teléfono es requerido',
-      }
-    },
-    id:{
-      type: 'id',
-      constraints: {
-        required: true,
-      },
-      errors: {
-        required: 'El campo cédula es requerido',
-      }
-    },
-    password:{
-      type: 'password',
-      constraints: {
-        required: true,
-      },
-      errors: {
-        required: 'El campo contraseña es requerido',
-      }
-    },
-    confirmPassword:{
-      type: 'confirm',
-      constraints: {
-        required: true,
-        confirm: 'password'
-      },
-      errors: {
-        required: 'Es necesario que confirme su contraseña',
-        confirm: 'La contraseña no coincide',
-      }
-    }
-  };
 
   const [errorStates, setErrorStates] = useState(() => {
     const initialErrors = {};
@@ -94,12 +36,6 @@ export const Form = ({
           setErrorStates({ ...errorStates, [prop]: error ? key : null });
           break;
 
-        case key === 'confirm':
-          const target = prop.toLowerCase().replace('confirm', '');
-          error = value !== values[target];
-          setErrorStates({ ...errorStates, [prop]: error ? key : null });
-          break;
-
         case regexKey.test(key):
           error = !structure[prop].constraints[key].test(value);
           setErrorStates({ ...errorStates, [prop]: error ? key : null });
@@ -114,24 +50,34 @@ export const Form = ({
   }
 
   const inputs = Object.keys(structure).map(key => {
-    return 
-      <Input 
-        id={key} 
-        {...structure[key]} 
-        value={values[key]}
-        errorState={errorStates[key]}
-        onBlur={handleChange(key)}
-        onChange={handleChange(key)}
-      />;
+    return <Input 
+      id={key}
+      key={key}
+      {...structure[key]} 
+      value={values[key]}
+      errorState={errorStates[key]}
+      onBlur={handleChange(key)}
+      onChange={handleChange(key)}
+    />;
   });
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const validForm = Object.keys(errorStates).every(key => errorStates[key] === null);
+    if(validForm){
+      console.log("valid");
+    }else{
+      console.log("invalid");
+    }
+  }
+
   return (
-    <form onSubmit={onSubmitCallback}> 
+    <form onSubmit={ onSubmit }> 
       { inputs }
       <Button type="submit" {...submitProps}>
           { submitText }
       </Button>
-      {...children}
+      {children}
     </form>
   )
 }

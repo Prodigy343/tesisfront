@@ -1,9 +1,4 @@
-html, body{
-  height: 100%;
-  width: 100%;
-  background: #f46b45;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #eea849, #f46b45);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #eea849, #f46b45); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+html{
 }
 
 body {
@@ -14,6 +9,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: block;
+  height: 100%;
+  min-height: 100vh;
+  background: #005bea;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #00c6fb 0%, #005bea 100%);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #00c6fb 0%, #005bea 100%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 code {
@@ -59,7 +60,7 @@ code {
 
 .event-container .information a:hover > button,
 .event-container .information a:hover > .data{
-  color: #f46b45;
+  color: #005bea;
 }
 
 .event-container .information a{
@@ -146,6 +147,7 @@ code {
 }
 
 .main-container{
+  padding-top: 12px;
   padding-bottom: 50px;
 }
 
@@ -153,17 +155,20 @@ code {
   padding: 25px;
 }
 
+.paper-container{
+  padding-top: 70px;
+}
+
 .paper-form{
   max-width: 390px;
   width: 85%;
   margin: auto;
   padding: 25px 0 45px;
-  margin-top: 70px;
 }
 
 .paper-form .send-btn{
   margin-top: 35px;
-  background-color: #f46b45;
+  background-color: #005bea;
   width: 50%;
   margin-left: auto;
   margin-right: 0;
@@ -173,7 +178,7 @@ code {
 
 .paper-form .send-btn:hover,
 .paper-form .send-btn:active{
-  background-color: #f46b45;
+  background-color: #005bea;
 }
 
 .paper-form input{
@@ -185,15 +190,15 @@ code {
 }
 
 .paper-form .MuiInput-underline:after{
-  border-bottom: 2px solid #f46b45;
+  border-bottom: 2px solid #005bea;
 }
 
 .paper-form .MuiFormLabel-root.Mui-focused{
-  color: #f46b45;
+  color: #005bea;
 }
 
 .paper-form .MuiInput-underline:hover:not(.Mui-disabled):before{
-  border-bottom: 2px solid #f46b45;
+  border-bottom: 2px solid #005bea;
 }
 
 .paper-form .container-form{
@@ -210,12 +215,12 @@ code {
   width: 100%;
   justify-content: center;
   font-size: 14px;
-  color: #f46b45;
+  color: #005bea;
   padding: 7px 0 0;
 }
 
 .container-form .MuiIconButton-root{
-  color: #f46b45;
+  color: #005bea;
 }
 
 .sidebar{

@@ -13,8 +13,8 @@ export const Main = ({children}) => {
     },
     {
       id: 1,
-      name: "Prueba 2",
-      link: "test-2",
+      name: "Dependencies",
+      link: "/dependencies",
     },
     {
       id: 2,

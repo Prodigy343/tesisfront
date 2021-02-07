@@ -1,7 +1,6 @@
 import React from 'react'
-import { Container, Grid } from '@material-ui/core';
 import Test from '../assets/test.jpg';
-import { Event } from './Event';
+import { Event } from '../components/Event';
 
 export const Events = () => {
   const data = [
@@ -48,10 +47,8 @@ export const Events = () => {
   );
   
   return (
-    <Container className="bg-white main-container" maxWidth="lg">
-      <Grid container spacing={3}>
-        {events}
-      </Grid>
-    </Container>
+    <div className="bg-white main-container" maxWidth="lg">      
+      {events}
+    </div>
   )
 };

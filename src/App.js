@@ -1,7 +1,8 @@
 import './App.css';
 import React, { useContext } from 'react';
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
-import { Events } from './components/Events';
+import { List as Dependencies } from './views/admin/dependencies/List';
+import { Events } from './views/Events';
 import { Signup } from './views/Signup';
 import { Forgot } from './views/Forgot';
 import { Login } from './views/Login';
@@ -27,7 +28,8 @@ function App() {
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route exact path='/events' component={Events}/>
-        <Route exact path='/login' render={() => <Redirect to="/"></Redirect>} />
+        <Route exact path='/dependencies' component={Dependencies}/>
+        <Route exact path='/login' render={() => <Redirect to="/"></Redirect>} />        
         <Route component={() => <h1>Not found</h1>} />
       </Switch>
     </Main>
