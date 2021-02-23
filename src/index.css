@@ -22,6 +22,10 @@ code {
     monospace;
 }
 
+.black{
+  color: black!important;
+}
+
 .logo-small{
   width: 50px;
 }
@@ -30,10 +34,124 @@ code {
   background-color: white;
 }
 
+.title-head{
+  font-size: 30px;
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 20px;
+}
+
+.form-container-full .head-section{
+  padding-bottom: 20px;
+}
+
+.form-container-full{
+  padding: 15px 0;
+}
+
+.head-section{
+  display: flex;
+}
+
+.head-section .title-head{
+  display: inline-flex;
+  width: 50%;
+}
+
+.head-section .options{
+  display: inline-flex;
+  width: 50%;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+.no-box-shadow .MuiPaper-elevation2{
+  box-shadow: none;
+}
+
+.table-fix .MuiTableRow-head .MuiTableCell-root:first-child{
+  min-width: 110px!important;
+  text-align: center;
+}
+
+.table-fix .MuiTableRow-head .MuiTableCell-root:nth-child(2){
+  width: 100%!important;
+}
+
 .align-middle{
   display: flex;
   justify-content: center;
   align-self: center;
+}
+
+.form-container-full {
+  width: 100%;
+}
+
+.form-container-full .row{
+  display: flex;
+  width: 100%;
+  align-content: center;
+  padding-top: 30px;
+}
+
+.form-container-full .row.row-list{
+  padding-top: 5px;
+}
+
+.form-container-full .row .fields{
+  display: inline-flex;
+  width: 90%;
+}
+
+.form-container-full .row .fields .container-half{
+  display: inline-flex;
+  width: 50%;
+  padding-right: 30px;
+}
+
+.form-container-full .row .btn-box{
+  display: inline-flex;
+  width: 10%;
+}
+
+.form-container-full.custom-width{
+  max-width: 900px;
+  margin: auto;
+}
+
+.form-container-full.custom-width .row{
+  max-width: 700px;
+  margin: 15px auto;
+}
+
+.container-full{
+  width: 100%;
+}
+
+.text-left{
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.text-center{
+  text-align: center;
+  justify-content: center;
+}
+
+.p-5{
+  padding: 50px;
+}
+
+.ml-2{
+  margin-left: 20px!important;
+}
+
+.custom-width .container-full{
+  padding: 20px 25px 15px;
+  max-width: 700px;
+  margin-left: 0;
 }
 
 .event-container{
@@ -148,7 +266,11 @@ code {
 
 .main-container{
   padding-top: 12px;
-  padding-bottom: 50px;
+  padding-bottom: 0px;
+}
+
+.shadowOff{
+  
 }
 
 .navbar{

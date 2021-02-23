@@ -7,11 +7,9 @@ import Context from './Context';
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Context.Provider>
-      <App />
-    </Context.Provider>
-  </React.StrictMode>,
+  <Context.Provider>
+    <App />
+  </Context.Provider>,
   document.getElementById('root')
 );
 

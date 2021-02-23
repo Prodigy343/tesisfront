@@ -13,16 +13,21 @@ export const Main = ({children}) => {
     },
     {
       id: 1,
-      name: "Dependencies",
-      link: "/dependencies",
+      name: "Dependencias",
+      link: "/dependency-list",
     },
     {
       id: 2,
-      name: "Prueba 3",
-      link: "test-3",
+      name: "Tipos de Eventos",
+      link: "/event-type-list",
     },
     {
       id: 3,
+      name: "Mi perfil",
+      link: "/profile",
+    },
+    {
+      id: 4,
       name: "Cerrar Sesión",
       link: "/",
     },

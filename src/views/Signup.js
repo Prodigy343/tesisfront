@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Paper } from '@material-ui/core';
 import { Form } from '../components/Form';
 
@@ -81,7 +82,10 @@ export const Signup = () => {
           setValues={setValues}
           submitText="Registrar"
           submitProps={submitProps}
-        /> 
+        >
+          <Link className="default-link" to='login'>Ya posee una cuenta?</Link>
+          <Link className="default-link" to='forgot'>Olvido su contraseña?</Link>
+        </Form>
       </Paper>
     </div>
   )

@@ -1,7 +1,11 @@
 import './App.css';
 import React, { useContext } from 'react';
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
-import { List as Dependencies } from './views/admin/dependencies/List';
+import { List as DependencyList } from './views/admin/dependencies/List';
+import { List as EventTypeList } from './views/admin/eventTypes/List';
+import { Create as EventTypeCreate } from './views/admin/eventTypes/Create';
+import { Edit as EventTypeEdit } from './views/admin/eventTypes/Edit';
+import { Profile } from './views/Profile';
 import { Events } from './views/Events';
 import { Signup } from './views/Signup';
 import { Forgot } from './views/Forgot';
@@ -28,7 +32,11 @@ function App() {
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route exact path='/events' component={Events}/>
-        <Route exact path='/dependencies' component={Dependencies}/>
+        <Route exact path='/dependency-list' component={DependencyList}/>
+        <Route exact path='/event-type-list' component={EventTypeList}/>
+        <Route exact path='/event-type-create' component={EventTypeCreate}/>
+        <Route exact path='/event-type-edit' component={EventTypeEdit}/>
+        <Route exact path='/profile' component={Profile}/>
         <Route exact path='/login' render={() => <Redirect to="/"></Redirect>} />        
         <Route component={() => <h1>Not found</h1>} />
       </Switch>
