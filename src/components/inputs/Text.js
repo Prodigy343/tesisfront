@@ -6,7 +6,7 @@ export const Text = ({id, key, label, errors, constraints, errorState, ...attr})
     <FormControl className={`container-form ${errorState?'ext-error':''}`}>
       <TextField {...attr} label={label}/>
       <div className="ext-error">
-        {errors[errorState]}
+        {errors?.[errorState]}
       </div>
     </FormControl>
   );

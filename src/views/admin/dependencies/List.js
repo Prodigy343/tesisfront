@@ -19,9 +19,7 @@ export const List = () => {
       if(response.status === 200)
         setDependencies(oldArray => [...oldArray, response.data.data]);
     })
-    .catch(e => {
-      console.error(e);
-    }),
+    .catch(e => console.error(e)),
 
     onRowUpdate: (newData, oldData) => {
       const index = oldData.tableData.id;

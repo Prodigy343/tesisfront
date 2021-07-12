@@ -18,6 +18,10 @@ export const Edit = ({location: {state: {id}}}) => {
       setInputList(fields);
     }
     fetchData();
+    return () => {
+      setEventTypeName("");
+      setInputList([]);
+    }
   }, []);
  
   // handle input change
@@ -70,7 +74,7 @@ export const Edit = ({location: {state: {id}}}) => {
     };
 
     EventTypeService.update({id, body: body})
-    .then(response => {
+    .then(() => {
       history.push('/event-type-list');
     })
     .catch(e => {

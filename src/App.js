@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useContext } from 'react';
+import { SnackbarProvider } from 'notistack';
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
 import { List as DependencyList } from './views/admin/dependencies/List';
 import { List as EventTypeList } from './views/admin/eventTypes/List';
@@ -44,11 +45,13 @@ function App() {
   );
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        { userState ? userRoutes : guestRoutes }
-      </BrowserRouter>
-    </div>
+    <SnackbarProvider maxSnack={3}>
+      <div className="App">
+        <BrowserRouter>
+          { userState ? userRoutes : guestRoutes }
+        </BrowserRouter>
+      </div>
+    </SnackbarProvider>
   );
 }
 

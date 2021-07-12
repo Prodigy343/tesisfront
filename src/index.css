@@ -405,9 +405,9 @@ code {
   padding: 15px 20px;
 }
 
-form .info{
+.paper-form .info{
   font-size: 14px;
-  padding: 0 25px;
+  padding: 0 40px;
 }
 
 .ext-error .ext-error{

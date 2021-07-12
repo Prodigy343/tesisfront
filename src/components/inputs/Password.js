@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FormControl, Input as MaterialInput, InputLabel  } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -25,6 +25,10 @@ export const Password = ({id, key, label, errors, constraints, errorState, confi
     event.preventDefault();
   };
 
+  useEffect(() => {
+    if(confirm)setConfirmFieldError( attr.value !== confirmField );
+  }, [attr.value]);
+
   return (
     <>
       <FormControl className={`container-form ${errorState?'ext-error':''}`}>
@@ -49,7 +53,7 @@ export const Password = ({id, key, label, errors, constraints, errorState, confi
             </InputAdornment>
           }
         />
-        <div className="ext-error">{errors[errorState]}</div>
+        <div className="ext-error">{errors?.[errorState]}</div>
       </FormControl>
       { confirm &&
         <FormControl className={`container-form ${confirmFieldError?'ext-error':''}`}>

@@ -1,75 +1,88 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { TextField, FormControl, Paper, Button, Input, InputLabel } from '@material-ui/core';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Visibility from '@material-ui/icons/Visibility';
-import IconButton from '@material-ui/core/IconButton';
+import Cookies from 'universal-cookie';
+import { useState, useRef } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { Paper } from '@material-ui/core';
+import { Form } from '../components/Form';
+import UserService from '../services/User';
 import CiensLogo from '../assets/ciens.png';
-import { Context } from '../Context';
+import { ACCESS_TOKEN_KEY } from '../utils/static';
 
 export const Login = () => {
+  const history = useHistory();
 
-  const [values, setValues] = React.useState({
-    user: '',
+  const structure = {
+    username:{
+      type: 'text',
+      label: 'Correo Electrónico',
+      constraints: {
+        required: true,
+        regex1: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 
+      },
+      errors: {
+        required: 'El campo correo es requerido',
+        regex1: 'El correo no tiene un formato válido'
+      }
+    },
+    password:{
+      type: 'password',
+      label: 'Contraseña',
+      constraints: {
+        required: true,
+      },
+      errors: {
+        required: 'El campo contraseña es requerido',
+      }
+    },
+  };
+
+  const [formValid, setFormValid] = useState(false);
+
+
+  const [values, setValues] = useState({
+    username: '',
     password: '',
-    showPassword: false,
   });
 
-  const {setUserState} = useContext(Context);
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const loginFake = () => {
-    console.log(values);
-    setUserState(true);
-
+  const submitProps = {
+    className: "send-btn",
+    variant: "contained",
+    color: "primary"
   }
+
+  const submitCallback = (e) => {
+    e.preventDefault();
+    const valid = ref.current.formValid();
+    if(!valid)return;
+
+    UserService.login(values)
+    .then(({data: {access_token}}) => {
+      const cookies = new Cookies();
+      cookies.set(ACCESS_TOKEN_KEY, access_token, { path: '/' });
+      history.push('/events');
+    })
+    .catch(e => console.error(e))
+  }
+
+  const ref = useRef();
 
   return (
     <div className="paper-container">
       <Paper className="paper-form login-form">
         <img className="logo" src={CiensLogo} alt=""/>
-        <form onSubmit={loginFake}>
-          <FormControl className="container-form" autoComplete="off">
-            <TextField id="ext-user" value={values.user} onChange={handleChange('user')} label="Usuario" />
-          </FormControl>
-          <FormControl className="container-form" noValidate autoComplete="off">
-            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-            <Input
-              id="ext-password"
-              type={values.showPassword ? 'text' : 'password'}
-              value={values.password}
-              onChange={handleChange('password')}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-          <Button type="submit" className="send-btn" variant="contained" color="primary">
-              Iniciar Sesión
-          </Button>
+        <Form
+          structure={structure} 
+          onSubmitCallback={submitCallback} 
+          values={values} 
+          setValues={setValues}
+          formValid={formValid}
+          setFormValid={setFormValid}
+          submitText="Iniciar Sesión"
+          submitProps={submitProps}
+          ref={ref}
+        >
           <Link className="default-link" to='signup'>Aún no posee una cuenta?</Link>
           <Link className="default-link" to='forgot'>Olvido su contraseña?</Link>
-        </form>
+        </Form>
       </Paper>
     </div>
   )
