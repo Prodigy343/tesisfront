@@ -1,23 +1,29 @@
-import './App.css';
-import React, { useContext } from 'react';
-import { SnackbarProvider } from 'notistack';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
-import { List as DependencyList } from './views/admin/dependencies/List';
-import { List as EventTypeList } from './views/admin/eventTypes/List';
-import { Create as EventTypeCreate } from './views/admin/eventTypes/Create';
-import { Edit as EventTypeEdit } from './views/admin/eventTypes/Edit';
-import { Profile } from './views/Profile';
-import { Events } from './views/Events';
-import { Signup } from './views/Signup';
-import { Forgot } from './views/Forgot';
-import { Login } from './views/Login';
-import { Home } from './views/Home';
-import { Main } from './views/Main';
-import { Context } from './Context';
+import './scss/base.scss'
+import React from 'react'
+import create from 'zustand'
+import produce from 'immer'
+import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom'
+import { List as DependencyList } from './views/admin/dependencies/List'
+import { List as EventTypeList } from './views/admin/eventTypes/List'
+import { Create as EventTypeCreate } from './views/admin/eventTypes/Create'
+import { Edit as EventTypeEdit } from './views/admin/eventTypes/Edit'
+import { Profile } from './views/profile/'
+import { Events } from './views/events/'
+import { Signup } from './views/signup/'
+import { Forgot } from './views/forgot/'
+import { Login } from './views/login/'
+import { Home } from './views/home/'
+import { Main } from './views/main/'
 
 function App() {
 
-  const { userState } = useContext(Context);
+  const useStore = create(set => ({
+    user: {
+      access_token: '',
+      refresh_token: ''
+    },
+    
+  }))
 
   const guestRoutes = (
     <Switch>
@@ -38,7 +44,7 @@ function App() {
         <Route exact path='/event-type-create' component={EventTypeCreate}/>
         <Route exact path='/event-type-edit' component={EventTypeEdit}/>
         <Route exact path='/profile' component={Profile}/>
-        <Route exact path='/login' render={() => <Redirect to="/"></Redirect>} />        
+        <Route exact path='/login' render={() => <Redirect to="/"></Redirect>}/>
         <Route component={() => <h1>Not found</h1>} />
       </Switch>
     </Main>
