@@ -2,9 +2,10 @@ import './scss/base.scss'
 import React from 'react'
 import create from 'zustand'
 import produce from 'immer'
+import { SnackbarProvider } from 'notistack'
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom'
-import { List as DependencyList } from './views/admin/dependencies/List'
-import { List as EventTypeList } from './views/admin/eventTypes/List'
+import { List as DependencyList } from './views/admin/dependencies/list'
+import { List as EventTypeList } from './views/admin/eventTypes/list'
 import { Create as EventTypeCreate } from './views/admin/eventTypes/Create'
 import { Edit as EventTypeEdit } from './views/admin/eventTypes/Edit'
 import { Profile } from './views/profile/'
@@ -14,16 +15,11 @@ import { Forgot } from './views/forgot/'
 import { Login } from './views/login/'
 import { Home } from './views/home/'
 import { Main } from './views/main/'
+import { useUserStore } from './store'
 
 function App() {
 
-  const useStore = create(set => ({
-    user: {
-      access_token: '',
-      refresh_token: ''
-    },
-    
-  }))
+  const user = useUserStore((state) => state.user)
 
   const guestRoutes = (
     <Switch>
@@ -54,7 +50,7 @@ function App() {
     <SnackbarProvider maxSnack={3}>
       <div className="App">
         <BrowserRouter>
-          { userState ? userRoutes : guestRoutes }
+          { user.token.length === 0 ? guestRoutes : userRoutes }
         </BrowserRouter>
       </div>
     </SnackbarProvider>

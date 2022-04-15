@@ -5,6 +5,8 @@ import { Paper } from '@material-ui/core'
 import { Form } from '../../components/Form'
 import UserService from '../../services/User'
 import CiensLogo from '../../assets/ciens.png'
+import { useUserStore } from '../../store'
+import { setToken } from '../../axiosConfig'
 import { ACCESS_TOKEN_KEY } from '../../utils/static'
 import classnames from 'classnames/bind'
 import styles from './styles.scss'
@@ -53,16 +55,21 @@ export const Login = () => {
     color: "primary"
   }
 
+  const setUser = useUserStore((state) => state.setUser)
+
   const submitCallback = (e) => {
     e.preventDefault();
     const valid = ref.current.formValid();
     if(!valid)return;
-
     UserService.login(values)
     .then(({data: {access_token}}) => {
-      console.log(access_token)
-      const cookies = new Cookies();
-      cookies.set(ACCESS_TOKEN_KEY, access_token, { path: '/' });
+      setToken(access_token)
+      setUser({
+        email: values.username,
+        token: access_token,
+      })
+      //const cookies = new Cookies();
+      //cookies.set(ACCESS_TOKEN_KEY, access_token, { path: '/' });
       history.push('/events');
     })
     .catch(e => console.error(e))

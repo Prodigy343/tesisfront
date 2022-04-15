@@ -71,11 +71,11 @@ export const Signup = () => {
       label: 'Dependencia',
       options: options.dependency,
     },
-    rol:{
+    /*rol:{
       type: 'select',
       label: 'Rol',
       options: options.rol,
-    },
+    },*/
     birthday:{
       type: 'date',
       label: 'Fecha de Nacimiento'
@@ -111,7 +111,6 @@ export const Signup = () => {
     lastName: '',
     birthday: moment(),
     dependency: '',
-    rol: '',
   })
 
   const [formValid, setFormValid] = useState(false)
@@ -124,7 +123,9 @@ export const Signup = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const {data: {data}} = await DependencyService.all()
+      const pageSize = -1
+      const { data: { data: { data } } } = await DependencyService.all(null, pageSize)
+      console.log(data)
       const dependencies = data.map(
         ({name}) => ({value: name, text: name})
       )
@@ -149,7 +150,6 @@ export const Signup = () => {
       password_confirmation: values.password,
       fullName: values.firstName,
       birthday: values.birthday.format(DATE_FORMAT),
-      rol: values.rol
     }
 
     UserService.create({body})

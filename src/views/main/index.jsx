@@ -1,14 +1,17 @@
 import React, {useState} from 'react'
 import { Container, Grid, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Sidebar } from '../../components/Sidebar';
+import { Sidebar } from '../../components/sidebar';
 import CiensLogo from '../../assets/ciens.png';
 import classnames from 'classnames/bind'
+import { useLogout } from '../../hooks/logout'
 import styles from './styles.scss'
 
 const cx = classnames.bind(styles)
 
 export const Main = ({children}) => {
+  const { logout } = useLogout()
+
   const items = [
     {
       id: 0,
@@ -34,6 +37,7 @@ export const Main = ({children}) => {
       id: 4,
       name: "Cerrar Sesión",
       link: "/",
+      onClick: logout
     },
   ]
 

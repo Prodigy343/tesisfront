@@ -1,8 +1,10 @@
 import axios from '../axiosConfig';
 
+const PREFIX_URL = 'eventTypes'
+
 const create = ({body}) => {
   try {
-    return axios.post('/eventtypes', body);
+    return axios.post(`/${PREFIX_URL}`, body);
   } catch (e) {
     throw e;
   }
@@ -10,7 +12,7 @@ const create = ({body}) => {
 
 const all = () => {
   try {
-    return axios.get('/eventtypes');
+    return axios.get(`/${PREFIX_URL}`);
   } catch (e) {
     throw e;
   }
@@ -18,7 +20,7 @@ const all = () => {
 
 const getById = ({id}) => {
   try {
-    return axios.get('/eventtypes/'+id);
+    return axios.get(`/${PREFIX_URL}/${id}`);
   } catch (e) {
     throw e;
   }
@@ -26,7 +28,7 @@ const getById = ({id}) => {
 
 const update = ({id, body}) => {
   try {
-    return axios.patch('/eventtypes/'+id, body);
+    return axios.patch(`/${PREFIX_URL}/${id}`, body);
   } catch (e) {
     throw e;
   }
@@ -34,7 +36,7 @@ const update = ({id, body}) => {
 
 const destroy = ({body}) => {
   try {
-    return axios.delete('/eventtypes/delete', {data: body});
+    return axios.delete(`/${PREFIX_URL}/delete`, {data: body});
   } catch (e) {
     throw e;
   }

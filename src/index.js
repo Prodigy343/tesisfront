@@ -3,13 +3,9 @@ import ReactDOM from 'react-dom';
 import './scss/base.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Context from './Context';
-
 
 ReactDOM.render(
-  <Context.Provider>
-    <App />
-  </Context.Provider>,
+  <App />,
   document.getElementById('root')
 );
 

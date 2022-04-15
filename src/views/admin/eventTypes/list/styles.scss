@@ -1,0 +1,8 @@
+.table-fix .MuiTableRow-head .MuiTableCell-root:first-child{
+    min-width: 110px!important;
+    text-align: center;
+}
+  
+.table-fix .MuiTableRow-head .MuiTableCell-root:nth-child(2){
+    width: 100%!important;
+}

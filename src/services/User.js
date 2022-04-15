@@ -21,7 +21,15 @@ const login = (body, refresh = false) => {
       client_secret: CLIENT_SECRET,
       ...body
     }
-    return oauth.post('/oauth/token', processedBody)
+    return oauth.post('/token', processedBody)
+  } catch (e) {
+    throw e
+  }
+}
+
+const logout = () => {
+  try {
+    return axios.get(`${PREFIX_URL}/logout`)
   } catch (e) {
     throw e
   }
@@ -59,6 +67,6 @@ const destroy = ({body}) => {
   }
 }
 
-const services = {create, login, all, getById, update, destroy}
+const services = {create, login, logout, all, getById, update, destroy}
 
 export default services
