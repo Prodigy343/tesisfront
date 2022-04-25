@@ -51,7 +51,7 @@ export const Events = () => {
   )
   
   return (
-    <div className="bg-white main-container" maxWidth="lg">      
+    <div className={cx("bg-white", "main-container")} maxWidth="lg">      
       {events}
     </div>
   )

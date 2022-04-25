@@ -1,28 +1,28 @@
-import { useEffect, useState } from 'react';
-import { useHistory } from "react-router-dom";
-import { FormControl, InputLabel, Select as MaterialSelect, MenuItem, TextField, IconButton } from '@material-ui/core';
-import { DeleteOutlined as DeleteOutlinedIcon } from '@material-ui/icons';
-import EventTypeService from '../../../services/EventType';
-import Button from '@material-ui/core/Button';
+import { useEffect, useState } from 'react'
+import { useHistory } from "react-router-dom"
+import { FormControl, InputLabel, Select as MaterialSelect, MenuItem, TextField, IconButton } from '@material-ui/core'
+import { DeleteOutlined as DeleteOutlinedIcon } from '@material-ui/icons'
+import EventTypeService from '../../../services/EventType'
+import Button from '@material-ui/core/Button'
 
 
 export const Edit = ({location: {state: {id}}}) => {
-  const history = useHistory();
-  const [inputList, setInputList] = useState([{ label: "", type: "" }]);
-  const [eventTypeName, setEventTypeName] = useState("");
+  const history = useHistory()
+  const [inputList, setInputList] = useState([{ label: "", type: "" }])
+  const [eventTypeName, setEventTypeName] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
-      const {data: {data: {name, fields}}} = await EventTypeService.getById({id});
-      setEventTypeName(name);
-      setInputList(fields);
+      const {data: {data: {name, fields}}} = await EventTypeService.getById({id})
+      setEventTypeName(name)
+      setInputList(fields)
     }
     fetchData();
     return () => {
-      setEventTypeName("");
-      setInputList([]);
+      setEventTypeName("")
+      setInputList([])
     }
-  }, []);
+  }, [id]);
  
   // handle input change
   const handleInputChange = (e, index) => {

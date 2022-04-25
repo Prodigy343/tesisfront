@@ -33,6 +33,15 @@ instance.interceptors.request.use(
   (error) => errorHandler(error)
 );
 
+instance.interceptors.response.use(response => {
+  if(response.data.status >= 400){
+    const error = new Error(response.data.message);
+    error.response = response;
+    throw error;
+  }
+  return response.data
+});
+
 export const setToken = (token) => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }

@@ -1,5 +1,4 @@
-import React from 'react'
-import { useUserStore } from '../store'
+import { useUserStore } from '../store/user'
 import { useHistory } from 'react-router-dom'
 import UserService from '../services/User'
 

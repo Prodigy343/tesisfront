@@ -27,7 +27,7 @@ export const Password = ({id, key, label, errors, constraints, errorState, confi
 
   useEffect(() => {
     if(confirm)setConfirmFieldError( attr.value !== confirmField );
-  }, [attr.value]);
+  }, [confirm, confirmField, attr.value]);
 
   return (
     <>

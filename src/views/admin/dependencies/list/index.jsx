@@ -1,93 +1,33 @@
-import { createRef } from 'react';
-import { createMuiTheme } from '@material-ui/core/styles';
-import DependencyService from '../../../../services/Dependency';
+import React from 'react'
+import { useDependencyStore } from '../../../../store/dependency'
+import { Table } from '../../../../components/table'
 import classnames from 'classnames/bind'
 import styles from './styles.scss'
 
 const cx = classnames.bind(styles)
 
 export const List = () => {
-
-  const tableRef = createRef();
+  const fetchDependencies = useDependencyStore((state) => state.fetchDependencies)
+  const dependencies = useDependencyStore((state) => state.dependency.dependencyList)
   const columns = [
-    { 
-      title: 'Nombre', 
-      field: 'name'
+    {
+      Header: "Name",
+      accessor: "name"
     },
-  ];
-  const editable = {
-    onRowAdd: newData => 
-      DependencyService.create(newData)
-      .then(({status}) => {
-        if(status >= 200 && status < 300)
-          tableRef.current && tableRef.current.onQueryChange()
-      })
-      .catch(e => 
-        console.error(e)
-      ),
-
-    onRowUpdate: (newData, oldData) => {
-      console.log(newData, oldData)
-      return DependencyService.update(newData, oldData.name)
-      .then(({status}) => {
-        if(status >= 200 && status < 300)
-          tableRef.current && tableRef.current.onQueryChange()
-      })
-      .catch(e =>
-        console.error(e)
-      )
+    {
+      Header: "description",
+      accessor: "description"
     },
+  ]
 
-    onRowDelete: oldData => {
-      return DependencyService.destroy(oldData.name)
-      .then(({status}) => {
-        //if(status >= 200 && status < 300)
-          //tableRef.current && tableRef.current.onQueryChange({page: 0})
-      })
-      .catch((e) => 
-        console.error(e)
-      );
-    }
-  };
-  
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#4caf50',
-      },
-      secondary: {
-        main: '#ff9100',
-      },
-    },
-
-  });
-
-  const dataCallback = query =>
-    new Promise((resolve, reject) => {
-      console.log("???????????")
-      console.log(query)
-      DependencyService.all(query.page+1, 2)
-      .then(({data: {data}}) => {
-        console.log("data-----")
-        console.log(data)
-        resolve({
-          data: data.data,
-          page: query.page,
-          totalCount: data.total
-        })
-        tableRef?.current?.onQueryChange({
-          page:
-            query.page === 0 || query.totalCount % query.pageSize !== 1
-              ? query.page
-              : query.page - 1
-        })
-      })
-    })
+  const data = React.useMemo(() => dependencies, [dependencies]);
 
   return (
-    <div className="no-box-shadow">
-      <div className="title-head">Lista de Dependencias</div>
-
-    </div>
-  );
+    <Table 
+      classNames={cx("dependencies-list", "list-table")}
+      fetchData={fetchDependencies}
+      columns={columns}
+      data={useDependencyStore((state) => state.dependency.dependencyList)}
+    />
+  )
 }

@@ -6,8 +6,18 @@ let userStore = (set) => ({
         token: '',
         email: '',
     },
-    setUser: (user) => set((state) => ({ user })),
-    clearUser: () => set((state) => ({ user: {token: '', email: ''} })) 
+    setUser: 
+        user => 
+            set(state => ({ 
+                ...state,
+                user 
+            })),
+    clearUser: 
+        () => 
+            set(state => ({ 
+                ...state,
+                user: {token: '', email: ''} 
+            }))
 })
 
 userStore = devtools(userStore)

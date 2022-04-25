@@ -1,7 +1,5 @@
 import './scss/base.scss'
 import React from 'react'
-import create from 'zustand'
-import produce from 'immer'
 import { SnackbarProvider } from 'notistack'
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom'
 import { List as DependencyList } from './views/admin/dependencies/list'
@@ -15,7 +13,7 @@ import { Forgot } from './views/forgot/'
 import { Login } from './views/login/'
 import { Home } from './views/home/'
 import { Main } from './views/main/'
-import { useUserStore } from './store'
+import { useUserStore } from './store/user'
 
 function App() {
 

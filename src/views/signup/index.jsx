@@ -8,7 +8,7 @@ import ciensLogo from '../../assets/ciens.png'
 import UserService from '../../services/User'
 import { DATE_FORMAT } from '../../utils/static'
 import moment from 'moment'
-import DependencyService from '../../services/Dependency'
+import { fetchDependenciesProvider } from '../../providers/Dependency'
 import classnames from 'classnames/bind'
 import styles from './styles.scss'
 
@@ -124,9 +124,8 @@ export const Signup = () => {
   useEffect(() => {
     async function fetchData() {
       const pageSize = -1
-      const { data: { data: { data } } } = await DependencyService.all(null, pageSize)
-      console.log(data)
-      const dependencies = data.map(
+      const { data } = await fetchDependenciesProvider(null, pageSize)
+      const dependencies = data.data.map(
         ({name}) => ({value: name, text: name})
       )
       const roles = [

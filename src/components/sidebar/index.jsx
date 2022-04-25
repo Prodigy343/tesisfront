@@ -19,7 +19,7 @@ export const Sidebar = ({items, sidebarState, setSidebarState}) => {
   return (
     <div className={`sidebar ${ sidebarState ? 'active' : '' }`}>
       <div className="sidebar-container">
-        <div className="close-btn">
+        <div className={cx("close-btn")}>
           <IconButton onClick={() => setSidebarState(false)} aria-label="menu" size="medium">
             <CloseIcon fontSize="inherit" />
           </IconButton>
