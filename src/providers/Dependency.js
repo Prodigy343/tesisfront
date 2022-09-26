@@ -1,6 +1,6 @@
 import axios from '../axiosConfig'
 
-const PREFIX_URL = '/dependencies' 
+const PREFIX_URL = '/dependency' 
 
 export const createDependencyProvider = body =>
     axios.post(PREFIX_URL, body)

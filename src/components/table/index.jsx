@@ -22,7 +22,7 @@ export const Table = ({ columns, data, fetchData }) => {
       data,
       initialState: { 
         page: 1,
-        pageSize: 6 
+        pageSize: 6
       }
     },
     usePagination
