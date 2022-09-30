@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useTable, usePagination } from "react-table";
+import './styles.scss';
 
 export const Table = ({ columns, data, fetchData }) => {
   useEffect(() => {
@@ -30,7 +31,7 @@ export const Table = ({ columns, data, fetchData }) => {
 
   return (
     <div>
-      <table {...getTableProps()}>
+      <table {...getTableProps()} className={"default"}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
