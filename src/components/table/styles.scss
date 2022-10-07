@@ -1,0 +1,41 @@
+$theme-color: red;
+.default {
+    border-collapse: collapse;
+    min-width: 520px;
+    background-color: white;
+    width: 100%;
+    text-align: left;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    cursor: default;
+    table-layout: fixed;
+}
+
+.default thead tr {
+    background-color: $theme-color;
+    color: white;
+    font-weight: bold;
+}
+
+.default th,
+.default td {
+    padding: 12px 15px;
+}
+
+.default tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.default tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.default tbody tr:last-of-type {
+    border-bottom: 3px solid $theme-color;
+}
+
+.default tbody tr:hover {
+    font-weight: bold;
+    color: $theme-color;
+}
