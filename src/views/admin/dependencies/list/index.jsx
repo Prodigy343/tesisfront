@@ -15,9 +15,13 @@ export const List = () => {
       accessor: "name"
     },
     {
-      Header: "description",
-      accessor: "description"
+      Header: "test",
+      Cell: ({cell}) => <button type="button" onClick={()=>{console.log("one cell");console.log(cell.row?.original?.name);}} >{cell.name}</button>
     },
+    {
+      Header: "delete",
+      Cell: ({cell}) => <button type="button" onClick={()=>{console.log("one cell");console.log(cell.row?.original?.name);}} >{cell.name}</button>
+    }
   ]
 
   const data = React.useMemo(() => dependencies, [dependencies]);
@@ -27,7 +31,7 @@ export const List = () => {
       classNames={cx("dependencies-list", "list-table")}
       fetchData={fetchDependencies}
       columns={columns}
-      data={useDependencyStore((state) => state.dependency.dependencyList)}
+      data={data}
     />
   )
 }
